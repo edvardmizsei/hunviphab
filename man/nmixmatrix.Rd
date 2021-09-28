@@ -1,12 +1,12 @@
-\name{hello}
-\alias{hello}
-\title{Hello, World!}
+\name{nmixmatrix}
+\alias{nmixmatrix}
+\title{nmixmatrix}
 \usage{
-hello()
+nmixmatrix()
 }
 \description{
-Prints 'Hello, world!'.
+create nmixmatrix
 }
 \examples{
-hello()
+nmixmatrix()
 }
