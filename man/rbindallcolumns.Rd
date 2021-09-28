@@ -1,12 +1,12 @@
-\name{hello}
-\alias{hello}
-\title{Hello, World!}
+\name{rbindallcolumns}
+\alias{rbindallcolumns}
+\title{rbindallcolumns}
 \usage{
-hello()
+rbindallcolumns()
 }
 \description{
-Prints 'Hello, world!'.
+rbindallcolumns.
 }
 \examples{
-hello()
+rbindallcolumns()
 }
