@@ -1,12 +1,12 @@
-\name{hello}
-\alias{hello}
-\title{Hello, World!}
+\name{obs2sites}
+\alias{obs2sites}
+\title{obs2sites}
 \usage{
-hello()
+obs2sites()
 }
 \description{
-Prints 'Hello, world!'.
+obs2sites.
 }
 \examples{
-hello()
+obs2sites()
 }
