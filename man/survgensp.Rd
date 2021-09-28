@@ -1,12 +1,12 @@
-\name{hello}
-\alias{hello}
-\title{Hello, World!}
+\name{survgensp}
+\alias{survgensp}
+\title{survgensp}
 \usage{
-hello()
+survgensp()
 }
 \description{
-Prints 'Hello, world!'.
+survgensp.
 }
 \examples{
-hello()
+survgensp()
 }
