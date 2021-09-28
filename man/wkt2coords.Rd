@@ -1,12 +1,12 @@
-\name{hello}
-\alias{hello}
-\title{Hello, World!}
+\name{wkt2coords}
+\alias{wkt2coords}
+\title{wkt2coords}
 \usage{
-hello()
+wkt2coords()
 }
 \description{
-Prints 'Hello, world!'.
+wkt2coords.
 }
 \examples{
-hello()
+wkt2coords()
 }
