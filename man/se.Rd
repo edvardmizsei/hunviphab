@@ -1,12 +1,12 @@
-\name{hello}
-\alias{hello}
-\title{Hello, World!}
+\name{se}
+\alias{se}
+\title{se}
 \usage{
-hello()
+se()
 }
 \description{
-Prints 'Hello, world!'.
+se.
 }
 \examples{
-hello()
+se()
 }
