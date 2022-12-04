@@ -47,7 +47,7 @@ for(i in 1:length(seasons)) {
     }
     
     ### if surveys LESS than needed reps
-    if(nrow(x.j)<reps) {
+    if(nrow(x.j)<=reps) {
       x.j.sel <- x.j[sample.int(nrow(x.j),reps,replace=T),]
     }
     dat <- rbind(dat,x.j.sel)
