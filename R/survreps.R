@@ -5,40 +5,54 @@ survreps <- function(x,sp,season,site.id,reps) {
   #site.id="ID_SHORT"
   #reps=20
 
-  dat <- data.frame()
-  seasons <- unique(x[,season])
-
-  i <- 1
-  for(i in 1:length(seasons)) {
-    x.s <- x[which(x[,season]==seasons[i]),]
-    repeat{
-      dat.s <- data.frame()
-      ids <- unique(x.s[,site.id])
-      j <- 1
-      for(j in 1:length(ids)) {
-        x.s.i <- x.s[which(x.s[,site.id]==ids[j]),]
-        nrow(x.s.i)
-        if(nrow(x.s.i)>=(reps+1)) {
-          x.s.i.pres <- x.s.i[which(x.s.i[,sp]>=1),]
-          if(nrow(x.s.i.pres)>=(reps+1)) {
-            x.s.i <- x.s.i.pres[sample.int(nrow(x.s.i.pres),reps,replace=F),]
-          }
-          if(nrow(x.s.i.pres)<=(reps+1))
-            x.s.i.abs <- x.s.i[which(x.s.i[,sp]==0),]
-          x.s.i.abs <- x.s.i.abs[sample.int(nrow(x.s.i.abs),reps-nrow(x.s.i.pres),replace=F),]
-          x.s.i <- rbind(x.s.i.pres,x.s.i.abs)
-        }
-        if(nrow(x.s.i)<=reps) {
-          x.s.i <- x.s.i[sample.int(nrow(x.s.i),reps,replace=T),]
-        }
-        dat.s <- rbind(dat.s,x.s.i)
+  # for seasons i
+seasons <- unique(x[,season])
+dat <- data.frame()
+i <- 1
+for(i in 1:length(seasons)) {
+  x.i <- x[which(x[,season]==seasons[i]),]
+  
+  ## for sites j
+  ids <- unique(x.i[,site.id])
+  dat.j <- data.frame()
+  j <- 1
+  for(j in 1:length(ids)) {
+    x.j <- x.i[which(x.i[,site.id]==ids[j]),]
+    
+    ### if surevs MORE than needed reps
+    if(nrow(x.j)>reps) {
+      x.j.pres <- x.j[which(x.j[,sp]>=1),]
+      
+      #### if surveys with obs zero
+      if(nrow(x.j.pres)==0) {
+        x.j.sel <- x.j[sample.int(nrow(x.j),reps,replace=F),]
       }
-      if(sum(dat.s[,sp])>=sum(x.s[,sp])) {
-        break
+      
+      #### if surveys with obs between 1 & reps
+      if(nrow(x.j.pres)>0 & nrow(x.j.pres)<=reps) {
+        x.j.abs <- x.j[which(x.j[,sp]==0),]
+        x.j.abs <- x.j.abs[sample.int(nrow(x.j.abs),reps-nrow(x.j.pres),replace=F),]
+        x.j.sel <- rbind(x.j.pres,x.j.abs)
+      }
+      
+      #### if survey with obs == n reps
+      if(nrow(x.j.pres)==reps) {
+        x.j.sel <- x.j.pres
+      }
+      
+      #### if survey with obs more than reps
+      if(nrow(x.j.pres)>reps) {
+        x.j.sel <- x.j.pres[sample.int(nrow(x.j.pres),reps,replace=F),]
       }
     }
-    dat <- rbind(dat,dat.s)
+    
+    ### if surveys LESS than needed reps
+    if(nrow(x.j)<reps) {
+      x.j.sel <- x.j[sample.int(nrow(x.j),reps,replace=T),]
+    }
+    dat <- rbind(dat,x.j.sel)
   }
+}
   return(dat)
 }
 
